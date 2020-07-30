@@ -1,0 +1,55 @@
+<div class="container mt-5 pb-3">
+    <div class="Header text-center p-3 ">
+        <h3 class="text-light">First Component</h3>
+    </div>
+    <div class="col-md-6 mt-5 ">
+        <div class="card p-5">
+            <form>
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" autocomplete="new-password" autocomplete="off" maxlength="15" class="form-control" id="fname" name="fname" [(ngModel)]="form.fname"
+                  #fname="ngModel" [pattern]="'^[a-zA-Z_ \'\-]+$'"  placeholder="Enter First Name" required>
+                  <div class="err" *ngIf="fname.invalid && (fname.dirty || fname.touched)">
+                    <div *ngIf="fname.errors.required">
+                        <p class="error">First Name is a mandatory field.</p>
+                    </div>
+                    <div *ngIf="fname.errors.pattern || fname.errors.minlength">
+                        <p class="error">First Name is invalid.</p>
+                    </div>
+                    </div>  
+                </div>
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" maxlength="15"class="form-control" id="lname" name="lname" [(ngModel)]="form.lname"
+                    #lname="ngModel" [pattern]="'^[a-zA-Z_ \'\-]+$'" placeholder="Enter Last Name" required>
+                    <div class="err" *ngIf="lname.invalid && (lname.dirty || lname.touched)">
+                        <div *ngIf="lname.errors.required">
+                            <p class="error">Last Name is a mandatory field.</p>
+                        </div>
+                        <div *ngIf="lname.errors.pattern || lname.errors.minlength">
+                            <p class="error">Last Name is invalid.</p>
+                        </div>
+                        </div>  
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="text" maxlength="2" minlength="2" class="form-control col-6" id="age" name="age" [(ngModel)]="form.age"
+                    #age="ngModel" [pattern]="'[0-9]+'" placeholder="Enter Age" required>
+                    <div class="err" *ngIf="age.invalid && (age.dirty || age.touched)">
+                        <div *ngIf="age.errors.required">
+                            <p class="error">Age is a mandatory field.</p>
+                        </div>
+                        <div *ngIf="age.errors.pattern || age.errors.minlength">
+                            <p class="error">Age Should be numeric.</p>
+                        </div>
+                        </div> 
+                </div>
+            
+                <button type="submit" class="btn btn-primary float-right" [disabled]="!form.lname || !form.fname || !form.age
+                || (age.invalid && (age.dirty || age.touched))
+                || (lname.invalid && (lname.dirty || lname.touched))
+                || (fname.invalid && (fname.dirty || fname.touched))" (click)="save()">Submit</button>
+              </form>
+        </div>
+    </div>
+</div>
