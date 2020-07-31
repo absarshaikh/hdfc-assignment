@@ -14,8 +14,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of table; let i = index">
-                <th scope="row">{{i}}</th>
+              <tr *ngFor="let data of table; let i = index" [class.active]="data === selectedCol" 
+              (click)="selected(data)">
+                <th scope="row">{{i+1}}</th>
+                
                 <td>{{data.fname}}</td>
                 <td>{{data.lname}}</td>
                 <td>{{data.age}}</td>
@@ -32,6 +34,75 @@
               <button class="btn btn-danger m-2" (click)="delete()">
                 Delete
               </button>
+
           </div>
     </div>
+
+  <div class="modal"  [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <!-- <header class="font-12 bold">Modal Header</header> -->
+                </div>
+                <div class="modal-body">
+                     <div class="p-5">
+            <form>
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" autocomplete="new-password" autocomplete="off" maxlength="15" class="form-control" id="fname" name="fname" [(ngModel)]="form.fname"
+                  #fname="ngModel" [pattern]="'^[a-zA-Z_ \'\-]+$'"  placeholder="Enter First Name" required>
+                  <div class="err" *ngIf="fname.invalid && (fname.dirty || fname.touched)">
+                    <div *ngIf="fname.errors.required">
+                        <p class="error">First Name is a mandatory field.</p>
+                    </div>
+                    <div *ngIf="fname.errors.pattern || fname.errors.minlength">
+                        <p class="error">First Name is invalid.</p>
+                    </div>
+                    </div>  
+                </div>
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" maxlength="15"class="form-control" id="lname" name="lname" [(ngModel)]="form.lname"
+                    #lname="ngModel" [pattern]="'^[a-zA-Z_ \'\-]+$'" placeholder="Enter Last Name" required>
+                    <div class="err" *ngIf="lname.invalid && (lname.dirty || lname.touched)">
+                        <div *ngIf="lname.errors.required">
+                            <p class="error">Last Name is a mandatory field.</p>
+                        </div>
+                        <div *ngIf="lname.errors.pattern || lname.errors.minlength">
+                            <p class="error">Last Name is invalid.</p>
+                        </div>
+                        </div>  
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="text" maxlength="2" minlength="2" class="form-control col-6" id="age" name="age" [(ngModel)]="form.age"
+                    #age="ngModel" [pattern]="'[0-9]+'" placeholder="Enter Age" required>
+                    <div class="err" *ngIf="age.invalid && (age.dirty || age.touched)">
+                        <div *ngIf="age.errors.required">
+                            <p class="error">Age is a mandatory field.</p>
+                        </div>
+                        <div *ngIf="age.errors.pattern || age.errors.minlength">
+                            <p class="error">Age Should be numeric.</p>
+                        </div>
+                        </div> 
+                </div>
+            
+                <button type="submit" class="btn btn-primary float-right" [disabled]="!form.lname || !form.fname || !form.age
+                || (age.invalid && (age.dirty || age.touched))
+                || (lname.invalid && (lname.dirty || lname.touched))
+                || (fname.invalid && (fname.dirty || fname.touched))" (click)="save()">Submit</button>
+              </form>
+        </div>
+                </div>
+               <!--  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+                </div> -->
+            </form>
+        </div>
+    </div>
 </div>
+</div>
+  

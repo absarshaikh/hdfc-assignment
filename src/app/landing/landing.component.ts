@@ -37,6 +37,7 @@ export class LandingComponent implements OnInit {
     console.log(this.flg)
     this.tableData.push(this.form)
     this.commonService.settter(this.tableData);
+    this.form={}
     var msg=""
     console.log(this.loadData)
     if(this.flg){
@@ -45,7 +46,7 @@ export class LandingComponent implements OnInit {
       msg='Data updated Successfully'
     }
     this.alertService.confirmThis(msg, 'Ok', '', () => {
-      this.router.navigateByUrl('table')
+      // this.router.navigateByUrl('table')
      }, () => { });
     // this.router.navigateByUrl('table');
   }

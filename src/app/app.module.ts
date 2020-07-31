@@ -11,6 +11,7 @@ import { DatatableComponent } from './datatable/datatable.component';
 import { CommonService } from './services/common.service';
 import { AlertComponent } from './components/alert-box/alert.component';
 import { AlertService } from './components/alert-box/alert.service';
+//import * as $ from "jquery";
 @NgModule({
   declarations: [
     AppComponent,
